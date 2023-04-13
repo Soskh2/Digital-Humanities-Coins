@@ -3,3 +3,7 @@
     {% csrf_token %}
     <button>Click this to go to the page where users will see the coin</button>
 </form>
+<form action="coin-data" method="post">
+    {% csrf_token %}
+    <input type="search" placeholder="Search coins">
+</form>
