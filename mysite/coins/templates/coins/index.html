@@ -1,17 +1,88 @@
-<h1>This is our coins homepage</h1>
-<form action="coin-data" method="post">
-    {% csrf_token %}
-    <button>Click this to go to the page where users will see the coin</button>
-</form>
-<form action="coin-data" method="post">
-    {% csrf_token %}
-    <input type="search" placeholder="Search coins">
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coins</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+      <!--
+      <form action="coin-data" method="post">
+          {% csrf_token %}
+          <button>Click this to go to the page where users will see the coin</button>
+      </form>
+      <form action="coin-data" method="post">
+          {% csrf_token %}
+          <input type="search" placeholder="Search coins">
+      </form>
+      -->
 
-{% if images %}
-    {% for image in images %}
-        <img src="{{image}}" alt="coin">
-    {% endfor %}
-{% else %}
-    <p> Error getting images</p>
-{% endif %}
+  <div class="container-fluid">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <span class="fs-4">Coins</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Browse</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Cabinet</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">TBD</a></li>
+      </ul>
+    </header>
+    
+    <hr>
+    <div class="d-flex justify-content-center">
+      <span class="fs-4">Generous Browse</span>
+    </div>
+    <hr>
+
+    <div class="row flex-nowrap">
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-secondary min-vh-100 bg-secondary">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline text-light">Search Attributes</span>
+                </a>
+                <ul class="flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+                    <li>
+                      <select class="form-select form-select-lg mb-3 bg-dark text-white" aria-label=".form-select-lg example">
+                        <option selected>Coin Origin</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col py-3">
+          <div class="container">
+            {% if images %}
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for image in images %}
+                <div class="col" onclick="location.href = '/coin-data?{{image}}'">
+                  <div class="card shadow-sm bg-dark">
+                    <div class="card-header text-white">
+                      Coin Name
+                    </div>
+                    <img src="{{image}}" alt="coin" width="100%" height="225">
+                    <div class="card-body d-flex justify-content-center align-items-center text-white">
+                      <p class="card-text">Origin | Year</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+            {% else %}
+              <p> Error getting images</p>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>
