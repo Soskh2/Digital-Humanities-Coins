@@ -7,3 +7,11 @@
     {% csrf_token %}
     <input type="search" placeholder="Search coins">
 </form>
+
+{% if images %}
+    {% for image in images %}
+        <img src="{{image}}" alt="coin">
+    {% endfor %}
+{% else %}
+    <p> Error getting images</p>
+{% endif %}
