@@ -5,6 +5,7 @@ from .utils import get_coin_images
 
 # Home page/default
 def index(request):
+    # In utils.py, array of images where each image contains image link and name
     images = get_coin_images()
     return render(request, "coins/index.html", {"images": images})
 
