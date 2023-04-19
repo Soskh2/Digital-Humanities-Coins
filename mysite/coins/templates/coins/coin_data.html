@@ -1,6 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coins</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<!--
 <h1>This is where users will see information about the coin they click</h1>
 
-<form action="home" method="get" target="_top">
+<form action="home" method="get">
     {% csrf_token %}
     <button>Click this to go back to the homepage</button>
 </form>
+-->
+
+    <div class="container-fluid h-100">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <span class="fs-4">Coins</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link">Browse</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Cabinet</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">TBD</a></li>
+        </ul>
+        </header>
+        
+        <hr>
+        <div class="d-flex justify-content-center">
+            <span class="fs-4">Coin View</span>
+        </div>
+        <hr>
+
+        <div class="row flex-nowrap">
+            <div class="col-md-3 col-xl-3 px-sm-2 px-0">
+                <p class="fs-3 px-3 fw-bold">Coin Name/Identifier</p>
+                <hr>
+                <div class="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2"></divclass>
+                    <p class="fs-5">Description</p>
+                    <p class="fs-5">Origin</p>
+                    <p class="fs-5">Year</p>
+                    <p class="fs-5">Hoard</p>
+                    <p class="fs-5">Composition</p>
+                    <p class="fs-5">Sources</p>
+                    <p class="fs-5">WikiData ID</p>
+                </div>
+                
+            </div>
+            <div class="col py-3 bg-dark d-flex flex-column align-items-center">
+                <img src="{{image}}" alt="coin" class="w-100">
+                <div class="d-flex flex-row align-items-center justify-content-center px-3 pt-2 w-100">
+                    <button type="button" class="btn btn-outline-secondary btn-light p-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/OOjs_UI_icon_sun-rtl.svg/240px-OOjs_UI_icon_sun-rtl.svg.png" width="40" height="auto"/></button>
+                    <p class="fs-2 text-light mx-4">Toggle Interactive Lighting</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+</html>
