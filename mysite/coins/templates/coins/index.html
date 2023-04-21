@@ -48,9 +48,9 @@
                     <li>
                       <select class="form-select form-select-lg mb-3 bg-dark text-white" aria-label=".form-select-lg example">
                         <option selected>Coin Origin</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {% for origin in origins %}
+                          <option value="{{ origin }}">{{ origin }}</option>
+                        {% endfor %}
                       </select>
                     </li>
                 </ul>
@@ -61,18 +61,18 @@
             {% if images %}
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {% for image in images %}
-                <div class="col" onclick="location.href = '/coin-data?{{image}}'">
-                  <div class="card shadow-sm bg-dark">
-                    <div class="card-header text-white">
-                      {{ image.1 }}
+                <div class="col">
+                  <a href="/coin-data/?id={{ image.3 }}" target="_blank" style="text-decoration: none">
+                    <div class="card shadow-sm bg-dark">
+                      <div class="card-header text-white">
+                        {{ image.1 }}
+                      </div>
+                        <img src="{{ image.0 }}" alt="coin" width="100%" height="225">
+                      <div class="card-body d-flex justify-content-center align-items-center text-white">
+                        <p class="card-text"> {{ image.4 }} | {{ image.2 }}</p>
+                      </div>
                     </div>
-                    <a href="coin-data" target="_blank">
-                      <img src="{{ image.0 }}" alt="coin" width="100%" height="225">
-                    </a>
-                    <div class="card-body d-flex justify-content-center align-items-center text-white">
-                      <p class="card-text">Origin | {{ image.2 }}</p>
-                    </div>
-                  </div>
+                  </a>
                 </div>
                 {% endfor %}
             {% else %}
