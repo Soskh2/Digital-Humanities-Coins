@@ -38,21 +38,24 @@
 
         <div class="row flex-nowrap">
             <div class="col-md-3 col-xl-3 px-sm-2 px-0">
-                <p class="fs-3 px-3 fw-bold">Coin Name/Identifier</p>
+                <p class="fs-3 px-3 fw-bold">{{data.0}}</p>
                 <hr>
                 <div class="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2"></divclass>
-                    <p class="fs-5">Description</p>
-                    <p class="fs-5">Origin</p>
-                    <p class="fs-5">Year</p>
-                    <p class="fs-5">Hoard</p>
-                    <p class="fs-5">Composition</p>
-                    <p class="fs-5">Sources</p>
-                    <p class="fs-5">WikiData ID</p>
+                    <p class="fs-5">Description: {{ data.3 }}</p>
+                    <p class="fs-5">Origin: {{ data.4 }}</p>
+                    <p class="fs-5">Time Period: {{ data.5 }}</p>
+                    <p class="fs-5">Date: {{ data.1 }}</p>
+                    <p class="fs-5">Material: {{ data.6 }}</p>
+                    <p class="fs-5">Die Axis: {{ data.7 }} degrees</p>
+                    <p class="fs-5">Diameter: {{ data.8 }} mm</p>
+                    <p class="fs-5">Mass: {{ data.9 }} grams</p>
+                    <p class="fs-5">Accession Number: {{ data.10 }}</p>
+                    <p class="fs-5">WikiData ID: {{ data.11 }}</p>
                 </div>
                 
             </div>
             <div class="col py-3 bg-dark d-flex flex-column align-items-center">
-                <img src="{{image}}" alt="coin" class="w-100">
+                <img src="{{data.2}}" alt="coin" class="w-100">
                 <div class="d-flex flex-row align-items-center justify-content-center px-3 pt-2 w-100">
                     <button type="button" class="btn btn-outline-secondary btn-light p-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/OOjs_UI_icon_sun-rtl.svg/240px-OOjs_UI_icon_sun-rtl.svg.png" width="40" height="auto"/></button>
                     <p class="fs-2 text-light mx-4">Toggle Interactive Lighting</p>
