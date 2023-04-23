@@ -107,7 +107,7 @@ def convert_to_date(date):
     
     return date
 
-def get_coin(qid):
+def get_coin(qid, in_arabic = False):
     ssl._create_default_https_context = ssl._create_unverified_context
     sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
     sparql.setReturnFormat(JSON)
@@ -123,6 +123,8 @@ def get_coin(qid):
                         ?statement pq:P1319 ?earliestdate.
                         ?statement pq:P1326 ?latestdate.}"""
 
+    language_params = f'"{("ar," if in_arabic else "")}[AUTO_LANGUAGE],en"'
+    
     sparql.setQuery(""" 
           SELECT ?item ?itemDescription ?itemLabel ?invNum ?image ?period ?materialLabel ?axis ?diameter ?mass ?originLabel ?earliestdate ?latestdate ?date
             WHERE 
@@ -144,7 +146,7 @@ def get_coin(qid):
                         ?ms ps:P2067 ?mass.}
                 OPTIONAL { ?item p:P1071 ?or.
                         ?or ps:P1071 ?origin.} """ + dateSPARQL + """
-                SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+                SERVICE wikibase:label { bd:serviceParam wikibase:language """+ language_params +""".}
             }
     """
     )

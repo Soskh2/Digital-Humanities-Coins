@@ -14,6 +14,12 @@ def index(request):
 # After user clicks on a coin
 def coin_data(request):
     qid = request.GET.get("id")
-    data = get_coin(qid)
+    in_arabic = False
+    labels = ["Description", "Location of Creation", "Time Period", "Inception", "Made From Material", "Die Axis", "Diameter", "Mass", "Inventory Number", "Wikidata Q identifier"]
+    if "in_arabic" in request.GET and request.GET.get("in_arabic") == "true":
+        in_arabic = True
+        # NOTE: DIE AXIS WAS THE ONLY LABEL WITHOUT A TRANSLATION ON WIKIDATA, SO THIS TEMPORARILY USES A GOOGLE TRANSLATION
+        labels = ["الوصف", "موقع التجميع النهائي", "الفترة الزمنية", "البداية", "المواد المستخدمة", "محور يموت", "القطر", "الكتلة", "مُعرِّف الجَرد", "معرف ويكي بيانات"]
+    data = get_coin(qid, in_arabic)
     data.append(qid)
-    return render(request, "coins/coin_data.html", {"data": data})
+    return render(request, "coins/coin_data.html", {"data": data, "labels":labels, "in_arabic":(True if in_arabic else False)})
