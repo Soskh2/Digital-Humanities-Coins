@@ -31,6 +31,9 @@ $('#coin_view_button').click(function (e) {
 
         $('#image-toggle').text("Toggle Interactive Reverse")
 
+        // Resize
+        img.removeClass("w-100");
+
         view = "obv";
     }
     else if(view == "obv") {
@@ -46,6 +49,11 @@ $('#coin_view_button').click(function (e) {
     else {
         // Switch back to the static image
         img.attr("src", default_path);
+
+        // Resize
+        img.addClass("w-100");
+
+
         view = "static";
 
         $('#image-toggle').text("Toggle Interactive Obverse");
