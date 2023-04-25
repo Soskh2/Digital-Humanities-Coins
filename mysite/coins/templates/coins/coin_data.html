@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+{% if in_arabic %}
+<html lang="ar" dir="rtl">
+{% else %}
 <html lang="en">
+{% endif %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,6 +37,12 @@
         <hr>
         <div class="d-flex justify-content-center">
             <span class="fs-4">Coin View</span>
+            <span class="fs-4">&nbsp;</span>
+            {% if in_arabic %}
+            <a href="?id={{ data.11 }}" class="fs-4">[English]</a>
+            {% else %}
+            <a href="?id={{ data.11 }}&in_arabic=true" class="fs-4">[اللغة العربية]</a>
+            {% endif %}
         </div>
         <hr>
 
@@ -41,16 +51,16 @@
                 <p class="fs-3 px-3 fw-bold">{{data.0}}</p>
                 <hr>
                 <div class="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2"></divclass>
-                    <p class="fs-5">Description: {{ data.3 }}</p>
-                    <p class="fs-5">Origin: {{ data.4 }}</p>
-                    <p class="fs-5">Time Period: {{ data.5 }}</p>
-                    <p class="fs-5">Date: {{ data.1 }}</p>
-                    <p class="fs-5">Material: {{ data.6 }}</p>
-                    <p class="fs-5">Die Axis: {{ data.7 }} degrees</p>
-                    <p class="fs-5">Diameter: {{ data.8 }} mm</p>
-                    <p class="fs-5">Mass: {{ data.9 }} grams</p>
-                    <p class="fs-5">Accession Number: {{ data.10 }}</p>
-                    <p class="fs-5">WikiData ID: {{ data.11 }}</p>
+                    <p class="fs-5">{{ labels.0 }}: {{ data.3 }}</p>
+                    <p class="fs-5">{{ labels.1 }}: {{ data.4 }}</p>
+                    <p class="fs-5">{{ labels.2 }}: {{ data.5 }}</p>
+                    <p class="fs-5">{{ labels.3 }}: {{ data.1 }}</p>
+                    <p class="fs-5">{{ labels.4 }}: {{ data.6 }}</p>
+                    <p class="fs-5">{{ labels.5 }}: {{ data.7 }} °</p>
+                    <p class="fs-5">{{ labels.6 }}: {{ data.8 }} mm</p>
+                    <p class="fs-5">{{ labels.7 }}: {{ data.9 }} g</p>
+                    <p class="fs-5">{{ labels.8 }}: {{ data.10 }}</p>
+                    <p class="fs-5">{{ labels.9 }}: {{ data.11 }}</p>
                 </div>
                 
             </div>
