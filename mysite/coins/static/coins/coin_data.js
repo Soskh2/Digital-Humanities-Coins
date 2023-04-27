@@ -34,10 +34,9 @@ $('#coin_view_button').click(function (e) {
 
         img.attr("src", top_name);
 
-        $('#image-toggle').text("Toggle Interactive Reverse")
-
-        // Resize
         img.removeClass("w-100");
+
+        $('#image-toggle').text("Toggle Interactive Reverse")
 
         view = "obv";
     }
@@ -55,9 +54,7 @@ $('#coin_view_button').click(function (e) {
         // Switch back to the static image
         img.attr("src", default_path);
 
-        // Resize
         img.addClass("w-100");
-
 
         view = "static";
 
