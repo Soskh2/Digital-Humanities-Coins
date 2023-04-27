@@ -8,7 +8,7 @@ var image_suffixes = [
     ["225", "270", "315"]];
 
 // Temporary - fix later
-var coin_name = "c5";
+var coin_name = "1938.6000.45";
 
 // Store original image:
 var default_path = "";
@@ -16,6 +16,11 @@ var default_path = "";
 // If the button is toggled, switch to interactive lighting
 $('#coin_view_button').click(function (e) {
     console.log("click");
+    console.log("check");
+
+    console.log($('#coin-id').val());
+    console.log($('#coin-id').text());
+    console.log("fail");
 
     var img = $('#coin-image');
 
