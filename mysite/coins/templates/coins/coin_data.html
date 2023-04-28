@@ -39,9 +39,9 @@
             <span class="fs-4">Coin View</span>
             <span class="fs-4">&nbsp;</span>
             {% if in_arabic %}
-            <a href="?id={{ data.11 }}" class="fs-4">[English]</a>
+            <a href="?id={{ data.12 }}" class="fs-4">[English]</a>
             {% else %}
-            <a href="?id={{ data.11 }}&in_arabic=true" class="fs-4">[اللغة العربية]</a>
+            <a href="?id={{ data.12 }}&in_arabic=true" class="fs-4">[اللغة العربية]</a>
             {% endif %}
         </div>
         <hr>
@@ -52,7 +52,12 @@
                 <hr>
                 <div class="d-flex flex-column align-items-start align-items-sm-start px-3 pt-2"></divclass>
                     <p class="fs-5">{{ labels.0 }}: {{ data.3 }}</p>
-                    <p class="fs-5">{{ labels.1 }}: {{ data.4 }}</p>
+                    <p class="fs-5">{{ labels.1 }}:&nbsp;
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#map">
+                            {{ data.4 }}
+                        </button>
+                    </p>
                     <p class="fs-5">{{ labels.2 }}: {{ data.5 }}</p>
                     <p class="fs-5">{{ labels.3 }}: {{ data.1 }}</p>
                     <p class="fs-5">{{ labels.4 }}: {{ data.6 }}</p>
@@ -72,6 +77,24 @@
                     <p id = "image-toggle" class="fs-2 text-light mx-4">Toggle Interactive Obverse</p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="map" tabindex="-1" aria-labelledby="mapLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ data.4 }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div style="width: 100%"><iframe width="100%" height="600" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q={{ data.11.1 }},%20{{ data.11.0 }}+(Location%20of%20Creation)&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/distance-area-calculator.html">measure acres/hectares on map</a></iframe></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
         </div>
     </div>
 
