@@ -126,7 +126,7 @@ def get_coin(qid, in_arabic = False):
     language_params = f'"{("ar," if in_arabic else "")}[AUTO_LANGUAGE],en"'
     
     sparql.setQuery(""" 
-          SELECT ?item ?itemDescription ?itemLabel ?invNum ?image ?period ?materialLabel ?axis ?diameter ?mass ?originLabel ?earliestdate ?latestdate ?date
+          SELECT ?item ?itemDescription ?itemLabel ?invNum ?image ?period ?materialLabel ?axis ?diameter ?mass ?originLabel ?earliestdate ?latestdate ?date ?coord
             WHERE 
             {
                 VALUES ?item {wd:""" + qid + """}
@@ -145,7 +145,9 @@ def get_coin(qid, in_arabic = False):
                 OPTIONAL { ?item p:P2067 ?ms.
                         ?ms ps:P2067 ?mass.}
                 OPTIONAL { ?item p:P1071 ?or.
-                        ?or ps:P1071 ?origin.} """ + dateSPARQL + """
+                        ?or ps:P1071 ?origin.
+                        ?origin p:P625 ?co.
+                         ?co ps:P625 ?coord.} """ + dateSPARQL + """
                 SERVICE wikibase:label { bd:serviceParam wikibase:language """+ language_params +""".}
             }
     """
@@ -154,7 +156,7 @@ def get_coin(qid, in_arabic = False):
         ret = sparql.queryAndConvert()['results']
         r = ret['bindings'][0]
         label = r['itemLabel']['value'].split(",")[0]
-        properties = ['image', 'itemDescription', 'originLabel', 'period', 'materialLabel', 'axis', 'diameter', 'mass', 'invNum']
+        properties = ['image', 'itemDescription', 'originLabel', 'period', 'materialLabel', 'axis', 'diameter', 'mass', 'invNum', 'coord']
         data = [label]
 
         # Handle Inception
@@ -167,6 +169,11 @@ def get_coin(qid, in_arabic = False):
         for property in properties:
             try:
                 temp = r[property]['value']
+                if property == 'coord':
+                    parts = temp.split(" ")
+                    parts[0] = parts[0][parts[0].index("(") + 1:]
+                    parts[1] = parts[1][:parts[1].index(")")]
+                    temp = tuple(parts)
             except:
                 temp = 'NA'
             data.append(temp)
