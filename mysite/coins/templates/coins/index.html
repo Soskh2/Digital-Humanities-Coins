@@ -42,12 +42,12 @@
     <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-secondary min-vh-100 bg-secondary">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline text-light">Search Attributes</span>
-                </a>
                 <form action="#" method="post">
                   {% csrf_token %}
                   <ul class="flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+                    <li class="p-2">
+                      <button type="submit" class="btn btn-primary btn-lg">Search Attributes</button>
+                    </li>
                       <li>
                         <select name="query" class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
                           <option selected>Coin Origin</option>
@@ -63,22 +63,28 @@
                             <option value="{{ material }}">{{ material}}</option>
                           {% endfor %}
                         </select>
-                        </li>
+                      </li>
+                      <li>
                         <label class="text-white">Date</label>
                         <div class="input-group mb-3">
                           <input class="form-control bg-dark text-white" type="input" placeholder="min" name="date">
                           <input class="form-control bg-dark text-white" type="input" placeholder="max" name="date">
                         </div>
+                      </li>
+                      <li>
                         <label class="text-white">Mass</label>
                         <div class="input-group mb-3">
                           <input class="form-control bg-dark text-white" type="input" placeholder="min" name="mass">
                           <input class="form-control bg-dark text-white" type="input" placeholder="max" name="mass">
                         </div>
+                      </li>
+                      <li>
                         <label class="text-white">Diameter</label>
                         <div class="input-group mb-3">
                           <input class="form-control bg-dark text-white" type="input" placeholder="min " name="diameter">
                           <input class="form-control bg-dark text-white" type="input" placeholder="max" name="diameter">
                         </div>
+                      </li>
                   </ul>
                 </form>
             </div>
