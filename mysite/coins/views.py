@@ -5,11 +5,11 @@ from .utils import get_default_images, get_coin
 
 # Home page/default
 def index(request):
+    if request.method == "POST":
+        print(request.POST)
     # In utils.py, array of images where each image contains image link and name
-    images, origins = get_default_images()
-    origins = list(origins)
-    origins.sort()
-    return render(request, "coins/index.html", {"images": images, "origins": origins})
+    images, origins, materials = get_default_images()
+    return render(request, "coins/index.html", {"images": images, "origins": origins, "materials": materials})
 
 # After user clicks on a coin
 def coin_data(request):
