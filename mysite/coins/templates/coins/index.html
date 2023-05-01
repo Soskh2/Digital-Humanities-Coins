@@ -46,13 +46,38 @@
                 </a>
                 <ul class="flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
                     <li>
-                      <select class="form-select form-select-lg mb-3 bg-dark text-white" aria-label=".form-select-lg example">
+                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
                         <option selected>Coin Origin</option>
                         {% for origin in origins %}
                           <option value="{{ origin }}">{{ origin }}</option>
                         {% endfor %}
                       </select>
                     </li>
+                    <li>
+                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
+                        <option selected>Coin Hoard</option>
+                        {% for origin in origins %}
+                          <option value="{{ origin }}">{{ origin }}</option>
+                        {% endfor %}
+                      </select>
+                    </li>
+                    <li>
+                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
+                        <option selected>Material</option>
+                        {% for material in materials %}
+                          <option value="{{ material }}">{{ material}}</option>
+                        {% endfor %}
+                      </select>
+                      </li>
+                      <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="mass">
+                      </div>
+                      <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="year">
+                      </div>
+                      <div class="input-group mb-3">
+                        <input class="form-control" type="text" placeholder="diameter">
+                      </div>
                 </ul>
             </div>
         </div>
