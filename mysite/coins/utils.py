@@ -2,9 +2,9 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 import ssl
 
 # Runs a SPARQL query to get the images from wikidata
-def get_default_images():
+def get_images(filter):
     query = """ 
-        SELECT ?item ?image ?itemLabel ?earliestdate ?latestdate ?originLabel ?inception ?materialLabel
+        SELECT DISTINCT ?item ?image ?itemLabel ?earliestdate ?latestdate ?originLabel ?inception ?materialLabel ?diameter ?mass
         WHERE 
         {
             VALUES ?item {wd:Q100562299 wd:Q100562428 wd:Q100472435 wd:Q100562710 wd:Q100467755 wd:Q100544414 wd:Q100536696 wd:Q100499045 wd:Q100487199 wd:Q100486776
@@ -13,6 +13,7 @@ def get_default_images():
             OPTIONAL {
                    ?item p:P1071 ?tmp.
                    ?tmp ps:P1071 ?origin. 
+                   ?origin rdfs:label ?originLabel ; filter(LANG(?originLabel) = "en")
             }
             OPTIONAL {
                    ?item p:P571 ?statement. 
@@ -23,7 +24,15 @@ def get_default_images():
                         ?statement pq:P1319 ?earliestdate.
                         ?statement pq:P1326 ?latestdate.}
             OPTIONAL { ?item p:P186 ?m.
-                       ?m ps:P186 ?material.}
+                       ?m ps:P186 ?material.
+                       ?material rdfs:label ?materialLabel ; filter(LANG(?materialLabel) = "en")
+                     }
+            OPTIONAL { ?item p:P2386 ?dia.
+                       ?dia ps:P2386 ?diameter.
+                     }
+            OPTIONAL { ?item p:P2067 ?ms.
+                       ?ms ps:P2067 ?mass.
+                     } """ + filter + """
             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
         }
         """
@@ -100,7 +109,6 @@ def get_coin(qid, in_arabic = False):
             }
     """
     result = execute_query(query)
-
     # Parses SPARQL result and puts into array
     r = result[0]
     label = r['itemLabel']['value'].split(",")[0]
@@ -157,3 +165,52 @@ def execute_query(query):
         print("exception")
         result = e
     return result
+
+
+def form_filter(params):
+    # Get search parameters
+    origin = params['origin']
+    material = params['material']
+    min_date = '' if not params['date_min'] else params['date_min']
+    max_date = '' if not params['date_max'] else params['date_max']
+    min_mass = '' if not params['mass_min'] else params['mass_min']
+    max_mass = '' if not params['mass_max'] else params['mass_max']
+    min_dia = '' if not params['dia_min'] else params['dia_min']
+    max_dia = '' if not params['dia_max'] else params['dia_max']
+
+    # Create corresponding SPARQL code
+    origin = 'FILTER(?originLabel="' + origin + '"@en). ' if origin != 'Coin Origin' else ' '
+    material = 'FILTER(?materialLabel="' + material + '"@en). ' if material != 'Material' else ' '
+    min_mass = ' ?mass >' + min_mass if min_mass != '' else min_mass
+    max_mass = ' ?mass <' + max_mass if max_mass != '' else max_mass
+
+    # Mass
+    if (min_mass and max_mass):
+        min_mass += " && "
+    mass = 'FILTER(' + min_mass + max_mass + ') ' if min_mass or max_mass else ' '
+
+    # Diameter
+    min_dia = ' ?diameter >' + min_dia if min_dia != '' else min_dia
+    max_dia = ' ?diameter <' + max_dia if max_dia != '' else max_dia
+    if (min_dia and max_dia):
+        min_dia += " && "
+    diameter = 'FILTER(' + min_dia + max_dia + ') ' if min_dia or max_dia else ' '
+
+    # Date
+    if min_date:
+        while len(min_date) != 4:
+            min_date = "0" + min_date
+        min_date += "-00-00T00:00:00+00:00"
+        min_date = ' FILTER(?earliestdate > "' + min_date + '"^^xsd:dateTime || ?inception > "' + min_date + '"^^xsd:dateTime)' if min_date else ' '
+
+    if max_date:
+        while len(max_date) != 4:
+            max_date = "0" + max_date
+        max_date += "-00-00T00:00:00+00:00"
+        max_date = ' FILTER(?earliestdate < "' + max_date + '"^^xsd:dateTime || ?inception < "' + max_date + '"^^xsd:dateTime)' if max_date else ' '
+
+
+    # Combine into query
+    filter = origin + material + mass + diameter + min_date + max_date
+
+    return filter

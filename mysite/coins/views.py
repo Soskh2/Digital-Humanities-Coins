@@ -1,14 +1,15 @@
 from django.shortcuts import render
-from .utils import get_default_images, get_coin
+from .utils import get_images, get_coin, form_filter
 
 # Create your views here.
 
 # Home page/default
 def index(request):
+    filter = ''
     if request.method == "POST":
-        print(request.POST)
+        filter = form_filter(request.POST)
     # In utils.py, array of images where each image contains image link and name
-    images, origins, materials = get_default_images()
+    images, origins, materials = get_images(filter)
     return render(request, "coins/index.html", {"images": images, "origins": origins, "materials": materials})
 
 # After user clicks on a coin
