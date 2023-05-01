@@ -64,14 +64,13 @@
                     <p class="fs-5">{{ labels.5 }}: {{ data.7 }} °</p>
                     <p class="fs-5">{{ labels.6 }}: {{ data.8 }} mm</p>
                     <p class="fs-5">{{ labels.7 }}: {{ data.9 }} g</p>
-                    <p id = "coin-id" class="fs-5">{{ labels.8 }}: {{ data.10 }}</p>
+                    <p id="coin-id" class="fs-5" val="{{ data.10 }}" a="a">{{ labels.8 }}: {{ data.10 }}</p>
                     <p class="fs-5">{{ labels.9 }}: {{ data.12 }}</p>
                 </div>
                 
             </div>
             <div class="col py-3 bg-dark d-flex flex-column align-items-center">
-                <!-- <img id = "coin-image" src="{{data.2}}" alt="coin" class="w-100"> -->
-                <img id = "coin-image" src="{{data.2}}" alt="coin" class="img-fluid w-100" style="max-height: 75vh; max-width: 100vw;" alt="Responsive Image">
+                <img id = "coin-image" src="{{data.2}}" alt="coin" class="img-fluid w-100" style="max-height: 80vh; max-width: 90vw;" alt="Responsive Image">
                 <div class="d-flex flex-row align-items-center justify-content-center px-3 pt-2 w-100">
                     <button type="button" id="coin_view_button" class="btn btn-outline-secondary btn-light p-2"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/OOjs_UI_icon_sun-rtl.svg/240px-OOjs_UI_icon_sun-rtl.svg.png" width="40" height="auto"/></button>
                     <p id = "image-toggle" class="fs-2 text-light mx-4">Toggle Interactive Obverse</p>
@@ -100,6 +99,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../../static/coins/coin_data.js"></script>
+    <script type="text/javascript" src="../../static/coins/coin_data_new.js"></script>
 </body>
 </html>

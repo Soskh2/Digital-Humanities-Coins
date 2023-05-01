@@ -15,12 +15,9 @@ var default_path = "";
 
 // If the button is toggled, switch to interactive lighting
 $('#coin_view_button').click(function (e) {
-    console.log("click");
 
-    console.log($('#coin-id').text().substring(18));
-    
     // Temporary fix for diplaying correct images
-    coin_name = $('#coin-id').text().substring(18);
+    coin_name = $('#coin-id').attr("val");
 
     var img = $('#coin-image');
 
