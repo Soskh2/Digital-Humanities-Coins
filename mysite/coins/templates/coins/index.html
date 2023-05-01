@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coins</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="../../static/coins/index.css" rel="stylesheet">
 </head>
 <body>
       <!--
@@ -44,41 +45,42 @@
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline text-light">Search Attributes</span>
                 </a>
-                <ul class="flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
-                    <li>
-                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
-                        <option selected>Coin Origin</option>
-                        {% for origin in origins %}
-                          <option value="{{ origin }}">{{ origin }}</option>
-                        {% endfor %}
-                      </select>
-                    </li>
-                    <li>
-                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
-                        <option selected>Coin Hoard</option>
-                        {% for origin in origins %}
-                          <option value="{{ origin }}">{{ origin }}</option>
-                        {% endfor %}
-                      </select>
-                    </li>
-                    <li>
-                      <select class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
-                        <option selected>Material</option>
-                        {% for material in materials %}
-                          <option value="{{ material }}">{{ material}}</option>
-                        {% endfor %}
-                      </select>
+                <form action="#" method="post">
+                  {% csrf_token %}
+                  <ul class="flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start">
+                      <li>
+                        <select name="query" class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
+                          <option selected>Coin Origin</option>
+                          {% for origin in origins %}
+                            <option value="{{ origin }}">{{ origin }}</option>
+                          {% endfor %}
+                        </select>
                       </li>
-                      <div class="input-group mb-3">
-                        <input class="form-control" type="text" placeholder="mass">
-                      </div>
-                      <div class="input-group mb-3">
-                        <input class="form-control" type="text" placeholder="year">
-                      </div>
-                      <div class="input-group mb-3">
-                        <input class="form-control" type="text" placeholder="diameter">
-                      </div>
-                </ul>
+                      <li>
+                        <select name="query" class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
+                          <option selected>Material</option>
+                          {% for material in materials %}
+                            <option value="{{ material }}">{{ material}}</option>
+                          {% endfor %}
+                        </select>
+                        </li>
+                        <label class="text-white">Date</label>
+                        <div class="input-group mb-3">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="min" name="date">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="max" name="date">
+                        </div>
+                        <label class="text-white">Mass</label>
+                        <div class="input-group mb-3">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="min" name="mass">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="max" name="mass">
+                        </div>
+                        <label class="text-white">Diameter</label>
+                        <div class="input-group mb-3">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="min " name="diameter">
+                          <input class="form-control bg-dark text-white" type="input" placeholder="max" name="diameter">
+                        </div>
+                  </ul>
+                </form>
             </div>
         </div>
         <div class="col py-3">

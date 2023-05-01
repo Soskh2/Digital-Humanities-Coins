@@ -4,7 +4,7 @@ import ssl
 # Runs a SPARQL query to get the images from wikidata
 def get_default_images():
     query = """ 
-        SELECT ?item ?image ?itemLabel ?earliestdate ?latestdate ?originLabel ?inception
+        SELECT ?item ?image ?itemLabel ?earliestdate ?latestdate ?originLabel ?inception ?materialLabel
         WHERE 
         {
             VALUES ?item {wd:Q100562299 wd:Q100562428 wd:Q100472435 wd:Q100562710 wd:Q100467755 wd:Q100544414 wd:Q100536696 wd:Q100499045 wd:Q100487199 wd:Q100486776
@@ -22,12 +22,16 @@ def get_default_images():
                         ?statement ps:P571 ?inception.
                         ?statement pq:P1319 ?earliestdate.
                         ?statement pq:P1326 ?latestdate.}
+            OPTIONAL { ?item p:P186 ?m.
+                       ?m ps:P186 ?material.}
             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
         }
         """
     result = execute_query(query)
     images = []
+
     origins = set()
+    materials = set()
 
     # Parses SPARQL result and puts into array
     for r in result:
@@ -36,14 +40,27 @@ def get_default_images():
         labels = r['itemLabel']['value'].split(",")
         label = labels[0] + "," + labels[1]
         date = convert_to_date(r['inception']['value']) if r['inception']['type'] == 'literal' else convert_to_date(r['earliestdate']['value']) + " - " + convert_to_date(r['latestdate']['value'])
+        
         try:
             origin = r['originLabel']['value']
         except:
             origin = 'NA'
         origins.add(origin)
+
+        try:
+            material = r['materialLabel']['value']
+        except:
+            material = 'NA'
+
+        materials.add(material)
         images.append([image, label, date, item, origin])
 
-    return [images, origins]
+    # Reformat sets for dropdowns
+    origins = list(origins)
+    origins.sort()
+    materials = list(materials)
+    materials.sort()
+    return [images, origins, materials]
 
 
 def get_coin(qid, in_arabic = False):
