@@ -156,7 +156,7 @@ def convert_to_date(date):
 # Execute a SPARQL query
 def execute_query(query):
     ssl._create_default_https_context = ssl._create_unverified_context
-    sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
+    sparql = SPARQLWrapper("https://query.wikidata.org/sparql", agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36")
     sparql.setReturnFormat(JSON)
     sparql.setQuery(query)
     try:
