@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .utils import get_images, get_coin, form_filter
+from django.http import JsonResponse
+from .utils import get_images, get_coin, form_filter, get_info
 
 # Create your views here.
 
@@ -24,3 +25,11 @@ def coin_data(request):
     data = get_coin(qid, in_arabic)
     data.append(qid)
     return render(request, "coins/coin_data.html", {"data": data, "labels":labels, "in_arabic":(True if in_arabic else False)})
+
+def cabinet_view(request):
+    coin_info = request.GET.get("this")
+    if (coin_info):
+        data = get_info(coin_info)
+        print(data)
+        return JsonResponse({"data": data})
+    return render(request, "coins/Cabinet-view.html")

@@ -214,3 +214,20 @@ def form_filter(params):
     filter = origin + material + mass + diameter + min_date + max_date
 
     return filter
+
+def get_info(coin_info):
+
+    query="""
+        SELECT ?itemLabel ?itemDescription 
+        WHERE {
+        VALUES ?item {wd:""" + coin_info + """}
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+  }
+        """
+    result = execute_query(query)
+    # Parses SPARQL result and puts into array
+    r = result[0]
+    label = r['itemLabel']['value'].split(",")[0]
+    description = r["itemDescription"]['value']
+
+    return [label, description]
