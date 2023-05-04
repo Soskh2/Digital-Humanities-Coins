@@ -7,7 +7,3 @@
 #### Make sure the SPARQL wrapper is installed. "pip install SPARQLWrapper"
 #### cd into the directory where the file "manage.py" is located. Then run "python manage.py runserver"
 
-## Admin Info
-#### To get to admin page put "/admin" after the base url
-#### Username: coins
-#### Password: coins
