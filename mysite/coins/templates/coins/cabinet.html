@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coins</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <!--
+      <form action="coin-data" method="post">
+          {% csrf_token %}
+          <button>Click this to go to the page where users will see the coin</button>
+      </form>
+      <form action="coin-data" method="post">
+          {% csrf_token %}
+          <input type="search" placeholder="Search coins">
+      </form>
+      -->
+
+  <div class="container-fluid">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <span class="fs-4">Coins</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/" class="nav-link">Browse</a></li>
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Cabinet</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">TBD</a></li>
+      </ul>
+    </header>
+
+    <hr>
+    <div class="d-flex justify-content-center">
+      <span class="fs-4">Interactive Coin Cabinet</span>
+    </div>
+    <div class="d-flex justify-content-center">
+      <span class="fs-6">Click a coin for more information!</span>
+    </div>
+    <hr>
+
+    <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+        <div
+          class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-secondary min-vh-10 bg-secondary">
+          <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
+            <span class="fs-5 d-none d-sm-inline text-light">Information</span>
+              <!-- <li>
+                <select name="origin" class="form-select form-select mb-3 bg-dark text-white" aria-label=".form-select example">
+                  <option selected>Coin Origin</option>
+                  {% for origin in origins %}
+                    <option value="{{ origin }}">{{ origin }}</option>
+                  {% endfor %}
+                </select>
+              </li> -->
+            <hr>
+          </a>
+        </div>
+        <div id="info" style="background-color: #0077b6; color: #f0f0f0; border-radius: 15px; padding: 10px; box-shadow: 2px 2px 5px #333333;"> </div>
+
+      </div>
+      <div id="rawr" class="col py-3">
+        <div id="backdrop" class="container"
+          style="border:1px solid black; background-image: url('https://media.istockphoto.com/id/977086910/photo/high-resolution-close-up-of-blue-felt-fabric.jpg?s=170667a&w=0&k=20&c=ux37EuNY3QrYmNEk12QKTXxgAq4v42TfjX61FL954f0='); width: auto; height: auto; padding-top: 10%; padding-left: 7%; padding-right: 0%; padding-bottom: 10%;">
+          <script>
+            let front_images = {
+              1: "https://lh3.googleusercontent.com/pw/AJFCJaXUtvIxMT_sy1_0MJWrloncF-Z8OT5XWulWBtgxjDd1AzcgDU4qlMGB6fjGe_rKQTa4B2DYGzx6GNsNQZf_0GIIa-RVX6smV9qoeny1bOlbsekCcuc=w2400",
+              2: "https://lh3.googleusercontent.com/pw/AJFCJaX1_VvPmCNMZxsquZkmvP9U-mvSB3ZLiHlcSJOX8rrFGw_viBxb0Vs4YXf2P4Az4dWjQlCghX4MpRhROO0pvItDU0zdi03BDqvnKIRV3xUhe7MZ-TU=w2400",
+              3: "https://lh3.googleusercontent.com/EAghlcTJr82MByGm27o7VqF_W6A5oh0T1GztCjF-yctU7kgOCPqT1AtQRzgcgsLqr4euvcIgFO-IxSMeSiTn6ocPjEXzmYTQKNwdYDpyKF_dBIX_QzZ_hikhZJ18dQQ0CVmFXlhVmQ=w2400",
+              4: "https://lh3.googleusercontent.com/pw/AJFCJaUwTHMe7PutOkZT-6bd4Kr6x5Q3Oiwc-l8dCw6PdpHQh1Hd4b40umu7FqYfOccAXH9MGSHu6E8P5G5r9b4Q7T8Y3PhjeYJxxkFLnCfJK-WUEuXy-_g=w2400",
+              5: "https://lh3.googleusercontent.com/mUfE9SnhrGdi3DXp6moSwHO1Gj9c7VKeLcF9vYNZZmdjhPiUXdh5pBPp1BwIWobi5K4i5Xg78njrmSVto_L5_T8QNrtccAlLRIIYY36jYtcpwJ93z7nCjfQyE2hrUk95yhMtfVEyXg=w2400",
+              6: "https://lh3.googleusercontent.com/xbFHgfcKTKS2gbiHHHnNs_qm_ghIZeNq6Uuf0bFLeCmKgEpzCV_rxqUXrgtiyAnQG8dmzHV9hn9mP_cLokihIxFTYkZ_vgaNZMUYO7oxuOUs3vzaXXONOyptLlxnqqrOD3GslDnTFg=w2400",
+              7: "https://lh3.googleusercontent.com/eLvZWYIBDHwZepkikyoBIsgD6uFxtnS6O_kIZGq54x3hfpkvGwd5uCP4m68nHpPNEAQmCujd0rqyc-tO3zfGOlldZo1Oha2IMwTSScsSFcEK0sr32kzP34vZLpIs8yhJ64Iwrls1kw=w2400",
+              8: "https://lh3.googleusercontent.com/pw/AJFCJaXog-oZOSn5RrVcIM0fPqRgcj7bAi_pms1oIFt9FitX-pDEtC3y45FnYDOioIJfDLj8h3IlFE1GKl1iCQ_S2HugKVq0A5X43Axhx6P-g9ZJz0WNQ0o=w2400",
+              9: "https://lh3.googleusercontent.com/pw/AJFCJaW1889DmMmqmRjTa8Xw81LkkzLxqEg1q0Qw-rtCpS41AQUlHmPB99YY4w6loyZuyM1tKzdncrNLZLYV4u1lWaGfX4brusghzSPwfA1n66KHOgkg_pU=w2400",
+              10: "https://lh3.googleusercontent.com/pw/AJFCJaXLQlup_C98HEtXEIQGEeFUsGB9OUFkodoLbW3TInGUeF4tt8EcCTzb1CuujAEi4A_eOpEbLiNhzau2GGNyIpDtf-nEO7sYwdKywdxWGX3AXotmit0=w2400",
+              11: "https://lh3.googleusercontent.com/pw/AJFCJaWFJe_k6008zLi5ZwPUqNldAwx8zvSPnn1Cq-OFoF_dUTHJMtCxLuERW455VpMmvPD1_TnvEV5tJALur_IqQFYAJFLm41BS2T2HnXBu4AoLrBtLUrk=w2400",
+              12: "https://lh3.googleusercontent.com/pw/AJFCJaVwctrjaX7bx4hlQdoWUW2pdUzweUjr1Zu0asH0n6pAo1XB7uvBFiaNF9HnfYHRHvDEVMxiBqApKIPit6kou6Ap3dF3om2p28KUBeaDrQm_X2h2JyY=w2400",
+              13: "https://lh3.googleusercontent.com/pw/AJFCJaWs4DyjjeD2OPcaKG5ll2F1SV0Xxg7ny5KzAAELzluG8epdapdqVkC2nF-GP9RQsCUm0DMdG5JmKUVxchgwK3xxVHlHRlhigK4NEmJlniWa_b69iOw=w2400",
+              14: "https://lh3.googleusercontent.com/pw/AJFCJaXmQPQIhnIj62A6mHvR1sXR2_R0FUIhY9zcsMfy-sSDByuzN0J94yg3uQPxVgsExa0H0GcFI1ZT_jb4OZHXEcSSnL1PPZgH62Bj3ejnD9EWspZYPmw=w2400",
+              15: "https://lh3.googleusercontent.com/pw/AJFCJaVE8GHrZIS7ekO3IlJRo2KFbs2VkJKTh6rWi79Y2QwpXOiZmVW28tYpw6wmhY0ovzFz1qGDOnvB5300YFOtG1auIvwDJBm0pDNutD4hvqHpZaK1Kao=w2400",
+              16: "https://lh3.googleusercontent.com/pw/AJFCJaXC0uPdQtm_QHUb071KYOtk-eLQuRE_Wy_QrGsJpD8HdP8lbNr-_gt0rGZ5tp2sCh-U0ojQXWK7Opl10u4NXiiF_BQs9CXUvWUTzPYHgSVq5N3B80w=w2400",
+              17: "https://lh3.googleusercontent.com/pw/AJFCJaVKoTpMg6zQor6I2Fu467uzILjBT-dFJEB5XD5fFmtzJrs7g5eOZ_gFyAR_QzpaU_zQQeLp2HEobERHSxnZ9B63VK0BG675cgbSJ64aN9LUcZG-Uw4=w2400",
+              18: "https://lh3.googleusercontent.com/pw/AJFCJaVrQhjMrRH4B8KYdYGrmJR1rHFCE3CSs0Deohjd_FcPBteqFIv74X3sd2JiRZ8lj2GyWVmJz0V7DV2k0P9uOsHNmX7Jg7GVhjV8FOKADJ8XK4Y6Pl8=w2400",
+              19: "https://lh3.googleusercontent.com/pw/AJFCJaX-llTJidxc1SpVk-1nQPYj8Tn_eeoxyJMRA5rg642wf5ojHpzU4nsdYTPYcMLhQdxXB0qngxtH21KlI7EMFaQjsUUy88t6aDZkl3q1M_FExICOrro=w2400",
+              20: "https://lh3.googleusercontent.com/pw/AJFCJaVAqZaOSZVo1Lh2s8Wcw7rnnbsZzQzUSE-45m3icyclqgKB1wPTd-Ujv4AOC42O3AgWyYLrvbsRKZlo9iySNYZUW7FFTBxpHXQRHOtSsa5Bz3O4rxw=w2400"
+            }
+
+            let wiki = {
+              1: "https://www.wikidata.org/wiki/Q100572348",
+              2: "https://www.wikidata.org/wiki/Q100576954",
+              3: "https://www.wikidata.org/wiki/Q100562921",
+              4: "https://www.wikidata.org/wiki/Q100562921",
+              5: "https://www.wikidata.org/wiki/Q100491992",
+              6: "https://www.wikidata.org/wiki/Q100535224",
+              7: "https://www.wikidata.org/wiki/Q100490930",
+              8: "https://www.wikidata.org/wiki/Q100491370",
+              9: "https://www.wikidata.org/wiki/Q100535215",
+              10: "https://www.wikidata.org/wiki/Q100534481",
+              11: "https://www.wikidata.org/wiki/Q100486776",
+              12: "https://www.wikidata.org/wiki/Q100487199",
+              13: "https://www.wikidata.org/wiki/Q100499045",
+              14: "https://www.wikidata.org/wiki/Q100536696",
+              15: "https://www.wikidata.org/wiki/Q100544414",
+              16: "https://www.wikidata.org/wiki/Q100562710",
+              17: "https://www.wikidata.org/wiki/Q100562710",
+              18: "https://www.wikidata.org/wiki/Q100472435",
+              19: "https://www.wikidata.org/wiki/Q100562428",
+              20: "https://www.wikidata.org/wiki/Q100562299"
+            }
+
+            function removeBorder(img_num) {
+              document.getElementById(img_num).style.border = 'none';
+            }
+
+            
+
+            function displayInfo(img_num, x, y, url, id) {
+              console.log(url.slice(-10))
+              
+              const getRequest = async (img_num) => {
+                  const response = await axios.get("/cabinet_view", {
+                  params: {
+                  "this": url.slice(-10)
+                  }
+                  })
+                  .then((response) => {
+                    console.log(response.data);
+                    console.log(response.data);
+                    const data = response.data.data; 
+
+                    const target = document.getElementById('info'); // assuming that 'target' is the ID of the element where you want to display the data
+  
+                     // Clear previous information
+                    target.innerHTML = "";
+
+                    // loop through the array and create a separate HTML element for each item
+                    for (let i = 0; i < data.length; i++) {
+                      const item = data[i];
+                      const itemElem =  document.createElement('div');
+                      itemElem.innerHTML = '<br><strong style="font-family: Arial, sans-serif; font-weight: bold;">' + item + '</strong>';
+                      
+                      // append the HTML element to the target element
+                      target.appendChild(itemElem);
+                    }
+                  });
+ 
+                  }
+                  getRequest();
+   
+                  // let information = document.createElement("div");
+                  // let text = document.createElement("p");
+                  // information.appendChild(response.data);
+                  // element.appendChild(information);
+                  var popupWindow = window.open(url, 'popUpWindow', 'height=500,width=800,left=' + x + ',top=' + y + ',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
+            }
+
+
+            let prev_id = null; // initialize the variable to null
+
+            for (let x in front_images) {
+              let coin_img = document.createElement("img");
+              coin_img.setAttribute("id", x);
+              coin_img.src = front_images[x];
+              coin_img.style = "width:150px; height:150px; position:relative; top: auto; left: auto; padding: 1%; cursor:pointer";
+              let element = document.getElementById("backdrop");
+              coin_img.addEventListener("click", function (e) {
+                if (prev_id) {
+                  const prev_coin = document.getElementById(prev_id);
+                  prev_coin.style.border = "none";
+                }
+                coin_img.style.border = "2px solid #FFFFFF";
+                prev_id = x;
+                displayInfo(x, e.clientX, e.clientY, wiki[x]);
+              });
+
+              element.appendChild(coin_img);
+
+            }
+
+          </script>
+
+          <!-- {% if images %}
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for image in images %}
+                <div class="col">
+                  <a href="/coin-data/?id={{ image.3 }}" target="_blank" style="text-decoration: none">
+                    <div class="card shadow-sm bg-dark">
+                      <div class="card-header text-white">
+                        {{ image.1 }}
+                      </div>
+                        <img src="{{ image.0 }}" alt="coin" width="100%" height="225">
+                      <div class="card-body d-flex justify-content-center align-items-center text-white">
+                        <p class="card-text"> {{ image.4 }} | {{ image.2 }}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                {% endfor %}
+            {% else %}
+              <p> Error getting images</p>
+            {% endif %} -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

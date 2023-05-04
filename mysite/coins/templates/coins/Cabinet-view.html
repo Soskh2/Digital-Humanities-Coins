@@ -45,16 +45,34 @@
     <hr>
 
     <div class="row flex-nowrap">
-      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-        <div
+      <div id = "divs" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+        <div style="box-shadow: 2px 2px 5px #333333;"
           class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-secondary min-vh-10 bg-secondary">
           <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-decoration-none">
-            <span class="fs-5 d-none d-sm-inline text-light">Information</span>
-            <hr>
-            
+            <br></br>
+            <span style="text-shadow: 2px 2px 5px #333333" class="fs-5 d-none d-sm-inline text-light">Information</span>
           </a>
+          <span class="fs-6 d-none d-sm-inline text-light">Click this button to toggle between the front/back of the coins:</span>
+          <p></p>
+          <button id="button" type="button" onclick="changeButton()"
+            style="border-radius: 12px; cursor:pointer; width: 100px; height: 50px;  box-shadow: 2px 2px 5px #333333; font-size: 100%;">Back
+            View</button>
+            <p></p>
+            <span class="fs-6 d-none d-sm-inline text-light">Click this button add a box, in which you can drag specific coins into to sort through them:</span>
+            <p></p>
+            <button type="button" onclick="newSortBox()"
+            style="border-radius: 12px; cursor:pointer; width: 150px; height: 50px;  box-shadow: 2px 2px 5px #333333; font-size: 100%;">Add New Sort Box</button>
+            <br></br>
+            <span class="fs-6 d-none d-sm-inline text-light">Click this button to set the page back to its original format:</span>
+            <p></p>
+            <button type="button" onclick="reload()"
+            style="border-radius: 12px; cursor:pointer; width: 150px; height: 75px;  box-shadow: 2px 2px 5px #333333; font-size: 100%;">Back to Initial Configuration</button>
+          <br></br>
         </div>
-        <div id="info" style="background-color: #0077b6; color: #f0f0f0; border-radius: 15px; padding: 10px; box-shadow: 2px 2px 5px #333333;"> </div>
+
+        <div id="info"
+          style="background-color: #0077b6; color: #f0f0f0; border-radius: 0px; padding: 10px; box-shadow: 2px 2px 5px #333333;">
+        </div>
 
       </div>
       <div id="rawr" class="col py-3">
@@ -84,6 +102,29 @@
               20: "https://lh3.googleusercontent.com/pw/AJFCJaVAqZaOSZVo1Lh2s8Wcw7rnnbsZzQzUSE-45m3icyclqgKB1wPTd-Ujv4AOC42O3AgWyYLrvbsRKZlo9iySNYZUW7FFTBxpHXQRHOtSsa5Bz3O4rxw=w2400"
             }
 
+            let back_images = {
+              1: "https://lh3.googleusercontent.com/pw/AJFCJaVE2PuPrCnp1qVNAGekJx4LKbrjfmuU77dXmNqaxKYqGe74oqMBhKvMovZbz2qyWrD88btqDC4gaUIIKsoNYvqcwZ6TItJfI7C7uPTKfkBmg179D9I=w2400",
+              2: "https://lh3.googleusercontent.com/pw/AJFCJaWuUtnaBRTYdwltkh1LnwvPxEHSDcBvV_I-HQWBheo26zGDpfO48lqmg2ev5hJb-EnxTzyEYAgNmr7CSywBB5dxAjl-i-Q06z5S5Ztkonx5a-JJdXg=w2400",
+              3: "https://lh3.googleusercontent.com/pw/AJFCJaXY1mMoWI5T3mW-DnqZJ-3-FkbTXGKnmbvskufZwgPIVcuEWoEoesVwuWEAWRXZr-VumdBrAIve_yXpFmmn_1Gs7GhlmuXaLXySkVfuPS0e48xOBQo=w2400",
+              4: "https://lh3.googleusercontent.com/w8OnJ-2Kn_XatyAUFhNTEwBdMgNjg-tRV7gkEdGFEgE49fG8E5LfambQF6RnnKoI_eudElIHOcN7ZVmJzI0cKOZzg0IhzCILy0VvT15BGRtvWiwBih_FnxzY3DDGQ_6rrgrtFOT7Xw=w2400",
+              5: "https://lh3.googleusercontent.com/pw/AJFCJaWqDo0PLFyegmtPEQiDAi5zE1PyoNB_IES70z8v--RA7dfL15Iy0cElPOIn_uwXXgSzRbOl5R0vERLjEM9Z1sQnUBgJT-x6estY6YW-weIp3r_EkW0=w2400",
+              6: "https://lh3.googleusercontent.com/pw/AJFCJaWHlxTZXgshZJfQ7dPX80c0_w8dbdINL66bgM1FBKogN9D0u2pwMFV6FqTpRDpve8-vGhG-ufhry84JB-NL8g_0F4rfGOptFXg0mLqCrrGR_UH47-U=w2400",
+              7: "https://lh3.googleusercontent.com/pw/AJFCJaXUqRb0AHcbm7FvBJnnmrtpN6wHJo8BvaBmNjeFeMzt63iMQ0hJ_68bLIgrfvoOKFtjd30qN6jngaioQA74A84Zk7B0bWNZpzAlvTwj0ECIJGFxXHc=w2400",
+              8: "https://lh3.googleusercontent.com/pw/AJFCJaW1Qi82I_eXCzJ6PgHZeilZa8oQA4ExVG9W8saaHwklnJWJL92w0sBwySq0UAmX_fp2mn5UbrKTZaFKRv5gGCAtXYOtdS0o0ewMFtFkZZEad_TvssE=w2400",
+              9: "https://lh3.googleusercontent.com/pw/AJFCJaVLOkXEXzqXQp62bgBn4EWNJJbiAS_IQWoQhg1fiTshf9NLWqMMs6PQjgWOnAIErtDmayRj4NvPOz57unhhwyLnA5ZJ_XIhFnJsT0PMRz8QcV4yPS0=w2400",
+              10: "https://lh3.googleusercontent.com/pw/AJFCJaWtLffl0MHA_eqpRksQxusMu_sJNFO_qZTn4KzCHEZ5QA1arPCx4GddmH0HJh_aEBNJUg96IQ-MvZG7uK27OB1aVyrZstP4C52npz9gMapjQnVmfHk=w2400",
+              11: "https://lh3.googleusercontent.com/pw/AJFCJaWnl9Ku3RKrSQ3k00_wpQRGnJ8vswAx6-YFKjrplbQERiMEzF6LmniQCFxZ-yKeWZym8A7GNdyTu5IctDey3HW-xlQLOT9C7RMX01rnQt1sCayAVa8=w2400",
+              12: "https://lh3.googleusercontent.com/pw/AJFCJaVSYETDv4gLx7QKzijNiTcwTn-0G9seefECopa7UsaJu4bjSIwmzl0pKyAZT4p2PccHmHKxaPBsZ9TmT4c1ZAQ5KX7E1ylfeSWdlSChXV5sAvNl1lo=w2400",
+              13: "https://lh3.googleusercontent.com/pw/AJFCJaU9Cwi9CnQksZf4PthkYJCx6vjO_YYT6HgEw3ODqbIkBC_f2JfGJ81nwXqGDiGmRfviecT9BAaltRowEVZReAPucegUCfUrG2vX_TeteMw8Slmup_E=w2400",
+              14: "https://lh3.googleusercontent.com/pw/AJFCJaUn0lPaLa5z6-UFDY4lZWuO0oGozKBnDGP23MGWR3wZQeoIaI7V1PT5BN1B5KiwDLT6AqjFiabq1yoJ-EMJqOCqbpdSMvizyJxwgc6oFOQkErh5ecE=w2400",
+              15: "https://lh3.googleusercontent.com/pw/AJFCJaWiODszEhhFag1fz4YOerhJ1ZS_lJhL6PhXKdoGA-ioiP7pVc4BYdHseVIYdzYWwSB55hKktHq8Rkkoo6N2wAzwNI0RjxMCl0TN54PEzqAmRvzECVk=w2400",
+              16: "https://lh3.googleusercontent.com/pw/AJFCJaWW4NHH3VwX7rUfHA-gVnzv9-UWRBfJPlKWpXj13wZZUzrGZVyzHUud34gG7B99-o7rGJ9Mtd4Xw3_Hpo0auVVaZfmeIvMcl-aKMAluSBcHal3obtg=w2400",
+              17: "https://lh3.googleusercontent.com/pw/AJFCJaWLAbSBgRItpKrL5AOANqmy8ObjTQJg6ojPQAng4MTWfuBSa-0TNFgfLYVt-0p-v1sJcE0X6KatFrnPaLHGxhNdjemtXpaOScKFnNsLrrZz0IDMeR4=w2400",
+              18: "https://lh3.googleusercontent.com/pw/AJFCJaWMIgnDzWsSvye3RJrFJIvCNaQG88jFExRg2-QEvlXGDZyl7xqSfzzWLCY-ySnuq0umjufnLk0bNyzB4-I4Uf0YHZLnXeoTXK6oqpNatYnYp3V8uGs=w2400",
+              19: "https://lh3.googleusercontent.com/pw/AJFCJaXCpa7cJcXnlchGAgDGet1FrSVZ_gaBmbPb0ixI3So-vape9O62asWienU1jkGJXF5oAFCEJfQWSfz8SePT_jr_XAEmvVst5V-i0Vzs-h9mwupq7-Q=w2400",
+              20: "https://lh3.googleusercontent.com/pw/AJFCJaWbfJqwHnhQ3Pq6hKnqHQbLoIMNz7mjeMkisup7lq7ezJfcYAb_ELNnWRR9fTKF-su_KzcqPFvGl9Aot3ytT2OvC8ti4NvBA13QKWbTBfsoiTQGVHE=w2400"
+            }
+
             let wiki = {
               1: "https://www.wikidata.org/wiki/Q100572348",
               2: "https://www.wikidata.org/wiki/Q100576954",
@@ -111,56 +152,181 @@
               document.getElementById(img_num).style.border = 'none';
             }
 
-            
 
             function displayInfo(img_num, x, y, url, id) {
               console.log(url.slice(-10))
-              
+
               const getRequest = async (img_num) => {
-                  const response = await axios.get("/cabinet_view", {
+                const response = await axios.get("/cabinet_view", {
                   params: {
-                  "this": url.slice(-10)
+                    "this": url.slice(-10)
                   }
-                  })
+                })
                   .then((response) => {
                     console.log(response.data);
                     console.log(response.data);
-                    const data = response.data.data; 
+                    const data = response.data.data;
 
                     const target = document.getElementById('info'); // assuming that 'target' is the ID of the element where you want to display the data
-  
-                     // Clear previous information
+
+                    // Clear previous information
                     target.innerHTML = "";
 
                     // loop through the array and create a separate HTML element for each item
                     for (let i = 0; i < data.length; i++) {
                       const item = data[i];
-                      const itemElem =  document.createElement('div');
+                      const itemElem = document.createElement('div');
                       itemElem.innerHTML = '<br><strong style="font-family: Arial, sans-serif; font-weight: bold;">' + item + '</strong>';
-                      
+
                       // append the HTML element to the target element
                       target.appendChild(itemElem);
                     }
                   });
- 
-                  }
-                  getRequest();
-   
-                  // let information = document.createElement("div");
-                  // let text = document.createElement("p");
-                  // information.appendChild(response.data);
-                  // element.appendChild(information);
-                  var popupWindow = window.open(url, 'popUpWindow', 'height=500,width=800,left=' + x + ',top=' + y + ',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
+
+              }
+              getRequest();
+
+              // let information = document.createElement("div");
+              // let text = document.createElement("p");
+              // information.appendChild(response.data);
+              // element.appendChild(information);
+              var popupWindow = window.open(url, 'popUpWindow', 'height=500,width=800,left=' + x + ',top=' + y + ',resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');
 
             }
 
 
             let prev_id = null; // initialize the variable to null
 
+            // function makeDrag(img_num) {
+            //   var dragItem = document.getElementById(img_num);
+            //   console.log(dragItem);
+            //   var container = document.getElementById("rawr");
+            //   console.log(container);
+
+            //   var active = false;
+            //   var currentX;
+            //   var currentY;
+            //   var initialX;
+            //   var initialY;
+            //   var xOffset = 0;
+            //   var yOffset = 0;
+
+            //   container.addEventListener("touchstart", dragStart, false);
+            //   container.addEventListener("touchend", dragEnd, false);
+            //   container.addEventListener("touchmove", drag, false);
+
+            //   container.addEventListener("mousedown", dragStart, false);
+            //   container.addEventListener("mouseup", dragEnd, false);
+            //   container.addEventListener("mousemove", drag, false);
+
+            //   function dragStart(e) {
+            //     if (e.type === "touchstart") {
+            //       initialX = e.touches[0].clientX - xOffset;
+            //       initialY = e.touches[0].clientY - yOffset;
+            //     } else {
+            //       initialX = e.clientX - xOffset;
+            //       initialY = e.clientY - yOffset;
+            //     }
+
+            //     if (e.target === dragItem) {
+            //       active = true;
+            //     }
+            //   }
+
+            //   function dragEnd(e) {
+            //     initialX = currentX;
+            //     initialY = currentY;
+
+            //     active = false;
+            //   }
+
+            //   function drag(e) {
+            //     if (active) {
+
+            //       e.preventDefault();
+
+            //       if (e.type === "touchmove") {
+            //         currentX = e.touches[0].clientX - initialX;
+            //         currentY = e.touches[0].clientY - initialY;
+            //       } else {
+            //         currentX = e.clientX - initialX;
+            //         currentY = e.clientY - initialY;
+            //       }
+
+            //       xOffset = currentX;
+            //       yOffset = currentY;
+
+            //       setTranslate(currentX, currentY, dragItem);
+            //     }
+            //   }
+
+            //   function setTranslate(xPos, yPos, el) {
+            //     el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+            //   }
+            // }
+            let container = document.getElementById("backdrop");
+
+            container.addEventListener('dragenter', function (e) {
+              e.preventDefault();
+            });
+
+            container.addEventListener('dragover', function (e) {
+              e.preventDefault();
+            });
+
+            // container.addEventListener('dragleave', drop);
+            container.addEventListener('drop', drop);
+
+
+
+            function drop(e) {
+              let y = e.clientY; 
+              let x = e.clientX;
+              // get the draggable element
+              var id = e.dataTransfer.getData('text/plain');
+              var draggable = document.getElementById(id);
+              console.log(draggable);
+              // add it to the drop target
+              e.target.appendChild(draggable);
+              
+              // display the draggable element
+              draggable.style.display = "block";
+              // console.log(y - 3.1 * container.offsetTop + "px");
+              // draggable.style.left = x - 1.4 * container.offsetLeft + "px";
+              // console.log(x - 1.4 * container.offsetLeft + "px");
+            }
+
+            function newSortBox () {
+              space = document.createElement("br");
+              document.getElementById("divs").appendChild(space);
+              new_div = document.createElement("div");
+              new_div.style = "border:1px solid black; background-image: url('https://media.istockphoto.com/id/977086910/photo/high-resolution-close-up-of-blue-felt-fabric.jpg?s=170667a&w=0&k=20&c=ux37EuNY3QrYmNEk12QKTXxgAq4v42TfjX61FL954f0='); width: auto; height: auto; padding-top: 10%; padding-left: 7%; padding-right: 0%; padding-bottom: 10%";
+              new_div.addEventListener('dragenter', function (e) {
+                e.preventDefault();
+              });
+              new_div.addEventListener('dragover', function (e) {
+                e.preventDefault();
+              });
+              new_div.addEventListener('drop', drop);
+              document.getElementById("divs").appendChild(new_div);
+            }
+            
+            function reload(){
+              window.location.reload();
+            } 
+
             for (let x in front_images) {
               let coin_img = document.createElement("img");
               coin_img.setAttribute("id", x);
+              console.log(coin_img.getAttribute("id"));
               coin_img.src = front_images[x];
+              coin_img.draggable = "true";
+              coin_img.addEventListener('dragstart', function (e) {
+                e.dataTransfer.setData('text/plain', e.target.id);
+                setTimeout(() => {
+                    e.target.style.display = "none";
+                }, 0);
+              });
               coin_img.style = "width:150px; height:150px; position:relative; top: auto; left: auto; padding: 1%; cursor:pointer";
               let element = document.getElementById("backdrop");
               coin_img.addEventListener("click", function (e) {
@@ -168,14 +334,75 @@
                   const prev_coin = document.getElementById(prev_id);
                   prev_coin.style.border = "none";
                 }
+                
                 coin_img.style.border = "2px solid #FFFFFF";
                 prev_id = x;
                 displayInfo(x, e.clientX, e.clientY, wiki[x]);
               });
-
+              // coin_img.addEventListener("mousedown", function (e) {
+              //   coin_img.style.cursor = "";
+              // });
               element.appendChild(coin_img);
-
             }
+
+            function changeButton() {
+              let img_dict;
+              let new_div;
+              console.log("heyyy");
+              let button = document.getElementById("button");
+              if (button.textContent == "Front View") {
+                img_dict = front_images;
+                button.textContent = "Back View";
+              } else {
+                img_dict = back_images;
+                button.textContent = "Front View";
+              }
+
+
+              for (let x in img_dict) {
+                let coin = document.getElementById(x);
+                coin.src = img_dict[x];
+              
+                // let coin_img = document.createElement("img");
+                // coin_img.setAttribute("id", x);
+                // coin_img.src = img_dict[x];
+                // coin_img.style = "width:150px; height:150px; position:relative; top: auto; left: auto; padding: 1%; cursor:pointer";
+                // let element = document.getElementById("backdrop");
+                // coin_img.addEventListener("click", function (e) {
+                //   if (prev_id) {
+                //     const prev_coin = document.getElementById(prev_id);
+                //     prev_coin.style.border = "none";
+                //   }
+                //   coin_img.style.border = "2px solid #FFFFFF";
+                //   prev_id = x;
+                //   displayInfo(x, e.clientX, e.clientY, wiki[x]);
+                // });
+
+                // element.appendChild(coin_img);
+
+              }
+            }
+
+
+            // for (let x in img_dict) {
+            //   let coin_img = document.createElement("img");
+            //   coin_img.setAttribute("id", x);
+            //   coin_img.src = img_dict[x];
+            //   coin_img.style = "width:150px; height:150px; position:relative; top: auto; left: auto; padding: 1%; cursor:pointer";
+            //   let element = document.getElementById("backdrop");
+            //   coin_img.addEventListener("click", function (e) {
+            //     if (prev_id) {
+            //       const prev_coin = document.getElementById(prev_id);
+            //       prev_coin.style.border = "none";
+            //     }
+            //     coin_img.style.border = "2px solid #FFFFFF";
+            //     prev_id = x;
+            //     displayInfo(x, e.clientX, e.clientY, wiki[x]);
+            //   });
+
+            //   element.appendChild(coin_img);
+
+            // }
 
           </script>
 
